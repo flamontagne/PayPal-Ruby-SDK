@@ -1265,6 +1265,13 @@ module PayPal::SDK
           self.merge!(response)
           success?
         end
+	
+	def delete_external_payment(transaction_id)
+	  path = "v1/invoicing/invoices/#{self.id}/payment-records/#{transaction_id}"
+	  response = api.delete(path, {}, http_header)
+	  self.merge!(response)
+	  success?
+	end
 
         def update()
           path = "v1/invoicing/invoices/#{self.id}"
@@ -1281,7 +1288,7 @@ module PayPal::SDK
         end
 
         raise_on_api_error :create, :send_invoice, :remind, :cancel,
-                           :record_payment, :record_refund, :update, :delete
+                           :record_payment, :delete_external_payment, :record_refund, :update, :delete
 
         #
         class << self
