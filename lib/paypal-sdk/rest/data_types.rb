@@ -2004,15 +2004,8 @@ module PayPal::SDK
           object_of :date, String
           object_of :method, String
           object_of :note, String
-	  object_of :amount, AmountDetail
+	  object_of :amount, Currency
         end
-      end
-      
-      class AmountDetail < Base
-	def self.load_members
-	  object_of :currency, String
-	  object_of :value, Currency
-	end
       end
 	    
       class RefundDetail < Base
